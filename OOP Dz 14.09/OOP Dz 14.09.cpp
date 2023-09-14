@@ -26,7 +26,7 @@ void main()
 	DynamicArray rez3 = a - b;	
 	rez3.Output();
 	// 5
-	DynamicArray rez4 = a + b;	
+	DynamicArray rez4 = a + b;	 
 	rez4.Output();	
 	//6
 	DynamicArray rezPlus = ++rez; 
