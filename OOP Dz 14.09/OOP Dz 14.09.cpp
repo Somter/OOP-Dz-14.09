@@ -13,20 +13,23 @@ void main()
 	b.Output();
 	//1
 	DynamicArray rez = a+10;
-	a = a + 10;	
 	cout << "+10 elements in array: " << endl;	
 	rez.Output();
 	//2
 	DynamicArray rez1 = a - 2;
+	cout << "Size - 2: " << endl;		
 	rez1.Output();
 	//3
 	DynamicArray rez2 = a*2;	
+	cout << "a * 2: " << endl;	
 	rez2.Output();	
 	//4
 	DynamicArray rez3 = a - b;	
+	cout << "a - b" << endl;	
 	rez3.Output();
 	// 5
-	DynamicArray rez4 = a + b;	 
+	DynamicArray rez4 = a + b;	
+	cout << "a + b" << endl;	
 	rez4.Output();	
 	//6
 	DynamicArray rezPlus = ++rez; 

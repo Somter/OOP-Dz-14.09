@@ -18,11 +18,11 @@ public:
 	DynamicArray& operator++();
 	DynamicArray& operator--();
 	
-	//~DynamicArray();	
+	~DynamicArray();	
 	void Input();// rand
-	void Output();// вывод на консоль
-	int* GetPointer();
-	int GetSize();
+	void Output() const;// вывод на консоль
+	int* GetPointer() const;
+	int GetSize() const;
 
 
 };

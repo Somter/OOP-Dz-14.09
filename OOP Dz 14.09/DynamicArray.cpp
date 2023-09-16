@@ -22,39 +22,48 @@ DynamicArray::DynamicArray(const DynamicArray& a)// copy constructor
 }
 DynamicArray DynamicArray::operator+(int size)		
 {
-	DynamicArray rez;	
-	rez.size = this->size + size;			
-	rez.ptr = new int[rez.size];					
-	for (int i = 0; i < this->size; i++)						 
+	this->size = this->size + size;	
+	int* newptr = new int[this->size];	
+	for (int i = 0; i < this->size - size; i++)	
 	{
-		rez.ptr[i] = ptr[i];				
-	}				
-	for (int i = this->size; i < rez.size; i++)	
-	{	
-		rez.ptr[i] = 0;		
+		newptr[i] = ptr[i];
 	}
-	return rez;		
+	for (int i = this->size - size; i < this->size; i++)	
+	{
+		newptr[i] = 0;	
+	}
+	if (ptr != nullptr)
+	{
+		delete[] ptr;
+	}
+	ptr = newptr;			
+	return *this;	
+	delete[]newptr;	
 }
 DynamicArray DynamicArray::operator-(int TwoElem)
 {
-	DynamicArray rez2;	
-	int count = 0;	
 
+	int count = 0;	
 	for (int i = 0; i < this->size; i++) {
 		count++;
 	}	
 	if (count <= TwoElem) {
-		return rez2;	
+		return DynamicArray(0);	
 	}
+	this->size = this->size - TwoElem;	
+	int* newptr2 = new int[this->size];
 
-	rez2.size = this->size - TwoElem;	
-	rez2.ptr = new int[rez2.size];	
-
-	for (int i = 0; i < rez2.size; i++)	
+	for (int i = 0; i < this->size; i++)		
 	{
-		rez2.ptr[i] = ptr[i];	
+		newptr2[i] = ptr[i];		
 	}	
-	return rez2;	
+	if (ptr != nullptr)		
+	{
+		delete[] ptr;		
+	}
+	ptr = newptr2;	
+	return *this;
+	delete[] newptr2;	
 }
 DynamicArray DynamicArray::operator*(int number)
 {
@@ -166,19 +175,12 @@ DynamicArray& DynamicArray::operator--()
 {
 	if (size > 0)
 	{
-		// Создаем новый массив с уменьшенным размером
 		int* newPtr = new int[size - 1];
-
-		// Копируем элементы из старого массива, исключая последний элемент
 		for (int i = 0; i < size - 1; i++)
 		{
 			newPtr[i] = ptr[i];
 		}
-
-		// Освобождаем старый массив
 		delete[] ptr;
-
-		// Обновляем указатель и размер
 		ptr = newPtr;
 		size--;
 	}
@@ -186,13 +188,13 @@ DynamicArray& DynamicArray::operator--()
 	return *this; 
 }
 
-//DynamicArray::~DynamicArray()
-//{	
-//	cout << "Destruct\n";	
-//	if (ptr != nullptr) {
-//		delete[] ptr;
-//	}	
-//}
+DynamicArray::~DynamicArray()
+{	
+	cout << "Destruct\n";	
+	if (ptr != nullptr) {
+		delete[] ptr;
+	}	
+}
 void DynamicArray::Input()
 {
 	for (int i = 0; i < size; i++)	
@@ -200,19 +202,19 @@ void DynamicArray::Input()
 		ptr[i] = rand() % 20;	
 	}	
 }
-void DynamicArray::Output()	
+void DynamicArray::Output()	const	
 {
-	for (int i = 0; i < size; i++)	
+	for (int i = 0; i < size; i++)		
 	{
 		cout << ptr[i] << "\t";
 	}
 	cout << "\n---------------------------------\n";
 }
-int* DynamicArray::GetPointer()
+int* DynamicArray::GetPointer() const
 {
 	return ptr;
 }
-int DynamicArray::GetSize()	
+int DynamicArray::GetSize()	const
 {
 	return size;	
 }	
